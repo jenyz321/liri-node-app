@@ -1,18 +1,20 @@
-// require("dotenv").config();
+require("dotenv").config();
 
-// var keys = require("./keys.js")
+var keys = require("./keys.js")
 var axios = require("axios");
 // var moment = require("moment");
 // var spotify = new spotify(keys.spotify);
 var input = process.argv[2];
 
-console.log("Before Axios");
+if(input === undefined) {
+  input = "Mr. Nobody";        
+}
 
 // Then run a request with axios to the OMDB API with the movie specified
-axios.get("http://www.omdbapi.com/?t=" + input + "&y=&plot=short&apikey=fdc8c4b3")
+axios.get("http://www.omdbapi.com/?t=" + input + "&y=&plot=short&apikey=" + keys.omdb.secret )
   .then(callBack);
 
-function callBack(response) {
+  function callBack(response) { 
 
   var { Title, Year, Genre, imdbRating } = response.data;
 
@@ -24,7 +26,7 @@ function callBack(response) {
 };
 
 
-console.log("After Axios");
+
 
 
 
